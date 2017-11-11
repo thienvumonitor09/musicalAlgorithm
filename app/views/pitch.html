@@ -12,6 +12,10 @@
         .form-inline .form-group input {
             width:50px;
         }
+
+        #noteCountID input{
+            width:80px;
+        }
     </style>
 </head>
 <!-- <button type="button" class="btn btn-default tooltip-bottom" title="This should be shifted to the right">Shift Right</button> -->
@@ -60,15 +64,16 @@
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                             <div class="form-inline">
-                                <p>
-                                    Note count:
+                                <div class="form-group" id="noteCountID">
+                                    <label>Note count: &emsp;</label>
                                     <input type="text" class="form-control" id="noteCoutID"
                                            ng-model="v.noteCount"
-                                           ng-change="noteCountChanged($index)"
-                                            placeholder="Enter number of notes">
-                                </p>
+                                           ng-change="noteCountChanged($index)">
+                                </div>
 
-
+                            </div>
+                            <p></p>
+                            <div class="form-inline">
                                 Select set for pitch:
                                 <select class="form-control"
                                         ng-change="updateInputSet($index)"

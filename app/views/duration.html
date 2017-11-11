@@ -3,6 +3,9 @@
         .form-inline .form-group input {
             width:50px;
         }
+        #noteCountID input{
+            width:80px;
+        }
     </style>
 </head>
 <div ng-controller="pitchCtrl">
@@ -53,12 +56,14 @@
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                             <div class="form-inline">
-                                <p>
-                                    Note count:
+                                <div class="form-group" id="noteCountID">
+                                    <label>Note count: &emsp;</label>
                                     <input type="text" class="form-control" id="noteCoutID" ng-model="v.noteCount" readonly>
-                                </p>
+                                </div>
 
-
+                            </div>
+                            <p></p>
+                            <div class="form-inline">
                                 Select set for duration:
                                 <select class="form-control"
                                         ng-change="updateDurationSet($index)"
