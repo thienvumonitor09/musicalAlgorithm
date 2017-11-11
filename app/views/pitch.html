@@ -8,6 +8,11 @@
     <!-- Custom styles for this template -->
     <link href="../css/tooltip-viewport.css" rel="stylesheet">
     <!-- End tooltip -->
+    <style>
+        .form-inline .form-group input {
+            width:50px;
+        }
+    </style>
 </head>
 <!-- <button type="button" class="btn btn-default tooltip-bottom" title="This should be shifted to the right">Shift Right</button> -->
 
@@ -141,20 +146,24 @@
                         </div> <!-- end div for input -->
                         <div class="col-xs-6 col-md-6">
                             <div class="form-inline">
-                                <p>
-                                    Range <input class="form-control" type="text" ng-model="v.pitchMinRange"> to
+                                <div class="form-group">
+                                    <label>Range &emsp;</label>
+                                    <input class="form-control" type="text" ng-model="v.pitchMinRange">
+                                </div>
+                                <div class="form-group">
+                                    <label>&emsp;&emsp;To &emsp;</label>
                                     <input class="form-control" type="text" ng-model="v.pitchMaxRange">
-
-
+                                </div>
+                                <div class="form-group">
                                     <button type="button" class="btn btn-link tooltip-right" data-toggle="tooltip" data-original-title="{{pitchRangeTooltip}}" data-placement="right">
                                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true" ></span>
                                     </button>
-
-
-
                                     <img ng-src="./img/pianoSmall.png" ng-click="openKeyboard()">
-                                </p>
+                                </div>
 
+                            </div>
+                            <p></p>
+                            <div class="form-inline">
                                 Select algorithm for pitch:
                                 <select class="form-control"
                                         ng-change="updatePitchMapping($index)"
