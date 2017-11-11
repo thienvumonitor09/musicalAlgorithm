@@ -597,7 +597,7 @@ angular.module("myApp")
 
 
         $scope.openKeyboard = function(){
-            $window.open('http://stormisprague.net/imgs/piano_keys.png', "Window Name", "height=800,width=295");
+            $window.open('http://musicalgorithms.ewu.edu/learnmore/keyboard.html', "Window Name", "height=800,width=350");
         }
 
 
