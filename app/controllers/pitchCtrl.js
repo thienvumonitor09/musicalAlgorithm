@@ -195,6 +195,9 @@ angular.module("myApp")
 
         }
 
+        $scope.updateVersion = function (link) {
+            window.location.href = link;
+        }
         $scope.updateInputSet = function (index) {
 
             var obj = $scope.allVoices[index];
