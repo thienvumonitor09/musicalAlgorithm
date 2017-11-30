@@ -115,15 +115,15 @@ function playAll(allVoices,tempo)
                 MIDI.noteOff(k, pitchValue + 20, endTime );
                 //MIDI.noteOff(1, 25, endTime);
 
-                (function (x) {
+                (function (x,y,z) {
                     setTimeout(function () {
                             unColorKeys();
-                            colorKey(finalPitchArray[x]);
+                            colorKey(finalPitchArray[x],y);
                             document.getElementById("pitchDisplay").innerHTML = document.getElementById("pitchDisplay").innerHTML + " " +finalPitchArray[x] ;
 
                         },
-                        durationMappingScaleForTimeOut[x]*1000);
-                })(i);
+                        durationMappingScaleForTimeOut[x]*(1000/tempo));
+                })(i,k,tempo);
 
             }
         }
@@ -199,11 +199,16 @@ function getDurationMappingScaleForTimeOut(durationMappingScale)
     return durationMappingScaleForTimeOut;
 }
 
-function colorKey(note)
+function colorKey(note,voiceNo)
 {
-    $("#"+note).css("background","#ee5f5b");
-
-
+    if(voiceNo == 0)
+        $("#"+note).css("background","#ee5f5b");
+    else if(voiceNo == 1)
+        $("#"+note).css("background","#40ee30");
+    else if(voiceNo == 2)
+        $("#"+note).css("background","#1f00ee");
+    else if(voiceNo == 3)
+        $("#"+note).css("background","#eaee07");
 }
 
 function unColorKeys()
@@ -270,6 +275,7 @@ function createKeyboard(){
     }
 
 }
+
 function pausePlayStop(tempo,stop,loadData) {
     //d.src = "./img/pause.png";
     //alert(loadData);
@@ -307,6 +313,7 @@ function pausePlayStop(tempo,stop,loadData) {
        }
 
        var colorMap = MIDI.Synesthesia.map();
+
        player.addListener(function(data) {
            var pianoKey = data.note - 21;
            var d = colorElements[pianoKey];
@@ -321,6 +328,7 @@ function pausePlayStop(tempo,stop,loadData) {
                }
            }
        });
+       
        MIDIPlayerPercentage(player);
    }
 
