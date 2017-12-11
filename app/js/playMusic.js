@@ -202,13 +202,13 @@ function getDurationMappingScaleForTimeOut(durationMappingScale)
 function colorKey(note,voiceNo)
 {
     if(voiceNo == 0)
-        $("#"+note).css("background","#ee5f5b");
+        $("#"+note).css("background","#ee421f");
     else if(voiceNo == 1)
-        $("#"+note).css("background","#40ee30");
+        $("#"+note).css("background","#71ee13");
     else if(voiceNo == 2)
-        $("#"+note).css("background","#1f00ee");
+        $("#"+note).css("background","#132cee");
     else if(voiceNo == 3)
-        $("#"+note).css("background","#eaee07");
+        $("#"+note).css("background","#ee19e4");
 }
 
 function unColorKeys()
@@ -328,7 +328,7 @@ function pausePlayStop(tempo,stop,loadData) {
                }
            }
        });
-       
+
        MIDIPlayerPercentage(player);
    }
 

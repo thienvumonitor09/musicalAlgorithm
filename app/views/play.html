@@ -209,8 +209,8 @@
 
 
     <div id="products" class="row list-group" >
-        <div class="item  col-xs-6 col-lg-6" ng-repeat="v in allVoices">
-            <div class="thumbnail">
+        <div  class="item  col-xs-6 col-lg-6" ng-repeat="v in allVoices">
+            <div id="playBorder{{$index+1}}" class="thumbnail">
 
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
@@ -245,9 +245,11 @@
                                     </select>
                                 </p>
                                 Mute Track: <input type="checkbox" ng-model="v.muted" />
+                                <!--
                                 <button type="button" class="btn btn-primary btn-sm" ng-click="play($index,tempo)" ng-disabled="v.muted">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </button>
+                                -->
                             </div>
 
 
@@ -271,11 +273,13 @@
     <!-- <button ng-click="pause()">Pause</button> <br/><br/>
     <button ng-click="resume()">Resume</button> <br/><br/> -->
     <!-- pause = 1, play =2 , stop =3 -->
+    <!--
     <p>
         <input type="image" src="./img/play.png" align="absmiddle" value="play" ng-click="pausePlayStop(tempo,false)" id="playPauseBtn">
-    <!-- <input type="image" src="./img/pause.png" align="absmiddle" value="pause" ng-click="pausePlayStop(tempo,1)" id="pauseBtn">-->
+
         <input type="image" src="./img/stop.png" align="absmiddle" value="stop" ng-click="pausePlayStop(tempo,true)" id="stopBtn">
     </p>
+    -->
     <md-content>
         <md-slider-container>
             <span>Tempo: </span>
@@ -404,10 +408,12 @@
             </div>
 
         </div>
+        <!--
         <div id="keys">
 
 
         </div>
+
         <div style="overflow: hidden;" id="colors"></div>
         <div class="player">
 
@@ -421,7 +427,7 @@
                 <span id="time2" class="time" style="text-align: left;">-0:00</span>
             </div>
         </div>
-
+        -->
 
         <p>
 

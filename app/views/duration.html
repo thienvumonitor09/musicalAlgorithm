@@ -44,7 +44,7 @@
 
     <div id="products" class="row list-group" >
         <div class="item  col-xs-12 col-lg-12" ng-repeat="v in allVoices">
-            <div class="thumbnail">
+            <div id="playBorder{{$index+1}}" class="thumbnail">
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
                         Voice {{$index + 1}}

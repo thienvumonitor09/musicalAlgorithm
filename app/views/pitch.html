@@ -38,7 +38,7 @@
                     ng-change="updateNumVoice()">
             </select>
             <!--Number of Voices count: <input type="text" ng-model="selectedNumVoice"> -->
-            <button type="button" class="btn btn-warning btn-sm" ng-click="addVoice()">
+            <button ng-disabled="numVoices==4" type="button" class="btn btn-warning btn-sm" ng-click="addVoice()">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Voice
             </button>
             <button type="button" class="btn btn-info btn-sm" ng-click="resetData()()">
@@ -52,7 +52,7 @@
 
     <div id="products" class="row list-group" >
         <div class="item  col-xs-12 col-lg-12" ng-repeat="v in allVoices">
-            <div class="thumbnail">
+            <div id="playBorder{{$index+1}}" class="thumbnail">
 
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
