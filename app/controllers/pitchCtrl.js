@@ -604,6 +604,10 @@ angular.module("myApp")
             $window.open('keyboard.html', "Window Name", "height=800,width=480");
         }
 
+        $scope.openRythm = function(){
+            $window.open('rythm.html', "Window Name", "height=200,width=900");
+        }
+
 
 
 
