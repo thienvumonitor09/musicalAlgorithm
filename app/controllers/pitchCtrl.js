@@ -753,7 +753,8 @@ angular.module("myApp")
 
         $scope.pitchRangeTooltip = "The purpose of the mapping process (called normalization) is to convert each input number into a pitch within a designated musical range." +
                                     " Here the user can set the desired range for the melody." +
-                                    " The default range 1-88 represents the piano range with 88 keys.";
+                                    " The default range 1-88 represents the piano range with 88 keys." +
+                                   " Zero will represent silence (no pitch)." ;
 
         $scope.durationRangeTooltip = "The duration mapping destination span is based on ascending rhythmic values represented by 0-9, starting with the sixteenth note and ending with a dotted whole.  In general, low input values convert to short rhythmic durations and high input values convert to long rhythmic durations.  The opposite mapping effect can be obtained in the utilities tools by inverting the input set.\n"
 
