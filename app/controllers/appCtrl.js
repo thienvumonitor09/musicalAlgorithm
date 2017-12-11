@@ -138,7 +138,6 @@ angular.module("myApp")
             {name : "Version 3.2", link : "http://musicalgorithms.org/3.2"},
             {name : "Version 3.1", link : "http://musicalgorithms.org/3.1"},
             {name : "Version 3.0", link : "http://musicalgorithms.org/3.0"},
-            {name : "Version 2.0", link : "http://musicalgorithms.org/2.0"},
             {name : "Version 1.0", link : "http://musicalgorithms.ewu.edu/"}
         ];
 
