@@ -601,7 +601,7 @@ angular.module("myApp")
 
 
         $scope.openKeyboard = function(){
-            $window.open('http://musicalgorithms.ewu.edu/learnmore/keyboard.html', "Window Name", "height=800,width=350");
+            $window.open('keyboard.html', "Window Name", "height=800,width=480");
         }
 
 
