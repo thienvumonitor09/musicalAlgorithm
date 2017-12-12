@@ -81,6 +81,7 @@
                                         ng-options="x for x in inputSetNames">
                                 </select>
                                 <ng-include src="'views/setTooltip.html'"></ng-include>
+                                <img src="img/protein.jpg" width="60" height="35" ng-click="openProtein()">
                             </div>
                             <!-- For DNA, RNA -->
                             <div ng-show="v.selectedSet == 'DNA' || v.selectedSet == 'RNA' || v.selectedSet == 'Protein'">

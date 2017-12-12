@@ -608,9 +608,9 @@ angular.module("myApp")
             $window.open('rythm.html', "Window Name", "height=200,width=900");
         }
 
-
-
-
+        $scope.openProtein = function(){
+            $window.open('protein.html', "Window Name", "height=500,width=1200");
+        }
 
         $scope.checkMorph = function(index,morphPercent1)
         {
