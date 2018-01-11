@@ -67,6 +67,7 @@ function playAll(allVoices,tempo)
     var velocity = 127; // how hard the note hits
     //var speedRate = 0.09;
     var speedRate = 2;
+    var arrOfTimeoutArr=[];
     for(var k = 0; k < allVoices.length; k++)
     {
 
@@ -87,9 +88,10 @@ function playAll(allVoices,tempo)
             /* Convert durationMapping into tick temp
              * Because original 0 in duration will not be play so it should be mapped to music tick
              * */
-            var durationMappingScale = getDurationMappingScale(durationMapping);
+            //alert("duration mapping :" + durationMapping);
+            var durationMappingScale = getDurationMappingScale_play(durationMapping);
 
-            //alert(durationMappingScale);
+            //alert("scale : " + durationMappingScale);
             //End converting duration tick
 
             /**
@@ -101,35 +103,150 @@ function playAll(allVoices,tempo)
             var durationMappingScaleForTimeOut = getDurationMappingScaleForTimeOut(durationMappingScale);
 
 
-           //alert("new :" + durationMappingScaleForTimeOut);
+           // alert("time out :" + durationMappingScaleForTimeOut);
 
-
+            //console.log(durationMappingScaleForTimeOut);
+            arrOfTimeoutArr.push(durationMappingScaleForTimeOut);
 
             for(var i = 0 ; i< finalPitchArray.length ; i++)
             {
                 var pitchValue = finalPitchArray[i];
-                MIDI.noteOn(k, pitchValue+20, velocity, startTime ); //set tempo faster hardcode now, later change algorithm
+                //MIDI.noteOn(k, pitchValue+20, velocity, startTime ); //set tempo faster hardcode now, later change algorithm
                 // MIDI.noteOn(1, 25, velocity, startTime+1);
                 startTime += durationMappingScale[i]/tempo;
                 endTime = startTime;
-                MIDI.noteOff(k, pitchValue + 20, endTime );
+                //MIDI.noteOff(k, pitchValue + 20, endTime );
                 //MIDI.noteOff(1, 25, endTime);
 
+                /*
                 (function (x,y,z) {
                     setTimeout(function () {
                             unColorKeys();
                             colorKey(finalPitchArray[x],y);
+                            //colorKey(finalPitchArray[x],y+1);
                             document.getElementById("pitchDisplay").innerHTML = document.getElementById("pitchDisplay").innerHTML + " " +finalPitchArray[x] ;
 
                         },
                         durationMappingScaleForTimeOut[x]*(1000/tempo));
                 })(i,k,tempo);
+                */
 
             }
+
+
         }
 
     }
+    //alert(arrOfTimeoutArr.length);
 
+    var timeoutA = arrOfTimeoutArr[0];
+    if(arrOfTimeoutArr.length > 1){ //merge only when there are more than 1 voice
+        for(var i = 1; i < arrOfTimeoutArr.length; i++){
+            timeoutA = mergeTwoSortedArr(timeoutA,arrOfTimeoutArr[i]);
+        }
+    }
+
+
+    for(var i = 0; i < arrOfTimeoutArr.length; i++){
+        //alert(arrOfTimeoutArr[i]);
+
+        var newVoice1 = arrOfTimeoutArr[i];
+        var obj = allVoices[i].finalPitchMapping;
+        //alert(obj);
+        //alert(arrOfTimeoutArr[i]);
+        for(var j = 0 ; j < timeoutA.length;j++)
+        {
+            /*
+            if(arrOfTimeoutArr[i][j] == timeoutA[j]){
+                newVoice1.push(obj[j]);
+            }else {
+                newVoice1.push(0);
+            }
+            */
+
+        }
+        //alert(newVoice1);
+
+    }
+    //var timeoutAA = [[0,1,1],[6,23,18]];
+    //var timeoutA = [0,6,12,18,24,36,60,84,120,156,192,240];
+    var voice_combine = [[1,1],[23,18],[45,0],[66,18],[88,0],[0,28],[0,35],[0,45],[0,55],[0,66],[0,77],[0,88]];
+    var scale_combine = [[6,6],[6,12],[6,0],[6,18],[48,0],[0,24],[0,24],[0,36],[0,36],[0,36],[0,48],[0,48]];
+
+    var voice_1 = [1,23,45,66,88];
+    var voice_2 = [1,18,0,18,0,28,35,45,55,66,77,88];
+    var startTime1 = 0;
+    var endTime1 = 0;
+
+    var startTime2 = 0;
+    var endTime2 = 0;
+
+    for(var i = 0; i < timeoutA.length; i++)
+    {
+
+
+        var voice1_arr = voice_combine[i];
+        var voice_scale = scale_combine[i];
+
+        //voice 1
+
+        if(voice1_arr[0] != 0)
+        {
+            MIDI.noteOn(0, voice1_arr[0]+20, 127, startTime1 ); //set tempo faster hardcode now, later change algorithm
+
+            startTime1 += voice_scale[0]/tempo;
+            endTime1 = startTime1;
+            MIDI.noteOff(0, voice1_arr[0] + 20, endTime1 );
+        }
+
+
+        //voice 2
+        if(voice1_arr[1] != 0)
+        {
+            MIDI.noteOn(1, voice1_arr[1]+20, 127, startTime2 ); //set tempo faster hardcode now, later change algorithm
+
+            startTime2 += voice_scale[1]/tempo;
+            endTime2 = startTime2;
+            MIDI.noteOff(1, voice1_arr[1] + 20, endTime2 );
+        }
+
+
+
+
+        (function (x,z) {
+            setTimeout(function () {
+                    unColorKeys();
+                    /*
+                    if(timeoutA[x] == 0 || timeoutA[x] == 6 || timeoutA[x] == 18)
+                    {
+                        colorKey(voice_1[x],0);
+                        colorKey(voice_2[x],1);
+                    }
+
+                    else if(timeoutA[x] == 12 || timeoutA[x] == 24)
+                    {
+                        colorKey(voice_1[x],0);
+                    }
+                    else
+                    {
+                        colorKey(voice_2[x],1);
+                    }
+                    */
+
+                    var playNoteA = voice_combine[x];
+                    for(var k = 0; k < playNoteA.length; k++)
+                    {
+                        colorKey(playNoteA[k],k);
+                    }
+
+                    //document.getElementById("pitchDisplay").innerHTML = document.getElementById("pitchDisplay").innerHTML + " " +finalPitchArray[x] ;
+
+                },
+                timeoutA[x]*(1000/tempo));
+        })(i,tempo);
+    }
+
+    console.log("end playALl");
     /*
     * Play light
     * */
@@ -172,14 +289,15 @@ function playAll(allVoices,tempo)
     //unColorKeys();
     document.getElementById("pitchDisplay").innerHTML = "";
     /*End play ligh*/
-}
+} //End playAll
 
-function getDurationMappingScale(durationMapping)
+function getDurationMappingScale_play(durationMapping)
 {
     /* Convert durationMapping into tick temp
      * Because original 0 in duration will not be play so it should be mapped to music tick
      * */
-    var noteDurations = [2,3,4,6,8,12,16,24,32,48];
+    //var noteDurations = [2,3,4,6,8,12,16,24,32,48];
+    var noteDurations = [6,9,12,18,24,36,48,72,96,144];
     var durationMappingScale = new Array(durationMapping.length);
     for(var i = 0; i< durationMappingScale.length ; i++)
     {
@@ -197,6 +315,50 @@ function getDurationMappingScaleForTimeOut(durationMappingScale)
         durationMappingScaleForTimeOut[i] = durationMappingScale[i-1] + durationMappingScaleForTimeOut[i-1];
     }
     return durationMappingScaleForTimeOut;
+}
+
+function mergeTwoSortedArr(arr1,arr2) {
+    var result = [];
+    var i = 0, j = 0;
+    //Traverse both array
+    while(i < arr1.length && j < arr2.length)
+    {
+        // Check if current element of first
+        // array is smaller than current element
+        // of second array. If yes, store first
+        // array element and increment first array
+        // index. Otherwise do same with second array
+        if(arr1[i] < arr2[j])
+        {
+            if(result.indexOf(arr1[i]) == -1){
+                result.push(arr1[i]);
+            }
+            i++;
+        }
+        else
+        {
+            if(result.indexOf(arr2[j]) < 0) {
+                result.push(arr2[j]);
+            }
+            j++;
+        }
+
+    }
+
+    // Store remaining elements of first array
+    while(i < arr1.length)
+    {
+        //if(result.indexOf(arr1[i]) < 0)
+        result.push(arr1[i++]);
+    }
+
+    // Store remaining elements of second array
+    while(j < arr2.length)
+    {
+        //if(result.indexOf(arr2[j]) < 0)
+        result.push(arr2[j++]);
+    }
+    return result;
 }
 
 function colorKey(note,voiceNo)
