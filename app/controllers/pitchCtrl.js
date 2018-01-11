@@ -225,10 +225,10 @@ angular.module("myApp")
 
 
         $scope.updatePitchMapping = function (index) 
-{
+        {
             var obj = $scope.allVoices[index];
-            //window.alert(obj.pitchInput.toString());
             obj.pitchMapping = InputMapping.getMapping(obj.pitchInput,obj.pitchAlgorithm, obj.pitchMinRange,obj.pitchMaxRange);
+            obj.noteCount = obj.pitchMapping.length;
 
         }
 
@@ -247,6 +247,8 @@ angular.module("myApp")
         $scope.convert = function (index,nitrogenBases,bioType) {
 
             var obj = $scope.allVoices[index];
+            //$window.alert(obj.pitchSequence);
+            obj.pitchSequence = ConvertBiologySequence.convertInputFormat(obj.pitchSequence);
             obj.pitchInput = ConvertBiologySequence.convert(obj.selectedSet,obj.pitchSequence,
                                                     nitrogenBases,bioType,$scope.proteinValues);//include convertBiologySequence.js
             obj.noteCount = obj.pitchInput.length;

@@ -1,5 +1,20 @@
+function convertInputFormat(arrayString)
+{
+    arrayString = arrayString.replace(/(\r\n|\n|\r)/gm," ");
+    arrayString = arrayString.replace(/\s+/g, '');
+    arrayString = arrayString.replace(/,/g, '');
+    arrayString = arrayString.replace(/[0-9]/g, '');
+    arrayString.trim();
+    arrayString = arrayString.toUpperCase();
+    arrayString = arrayString.split("").join(",");
+    return arrayString;
+}
+
 function convert(selectedSet,arrayString,nitrogenBases,bioType,proteinValues) {
     var result = [];
+
+    convertInputFormat(arrayString);
+    //alert(arrayString);
     if(!Array.isArray(arrayString))
     {
         arrayString = arrayString.split(",");

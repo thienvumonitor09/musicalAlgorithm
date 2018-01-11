@@ -39,13 +39,15 @@ angular.module("myApp")
         var factory = {};
         factory.getMapping = function(inputSet,algorithm,minRange,maxRange) {
             return getInputMapping(inputSet,algorithm,minRange,maxRange); // include inputMapping
-
         }
         return factory;
     })
     .factory('ConvertBiologySequence', function() {
         var factory = {};
-        factory.convert= function(selectedSet,arrayString,nitrogenBases,bioType,proteinValues) {
+        factory.convertInputFormat = function (arrayString) {
+            return convertInputFormat(arrayString);
+        }
+        factory.convert = function(selectedSet,arrayString,nitrogenBases,bioType,proteinValues) {
             return convert(selectedSet,arrayString,nitrogenBases,bioType,proteinValues); // include convertBiologySequence.js
         }
 
